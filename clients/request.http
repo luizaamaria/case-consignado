@@ -1,0 +1,11 @@
+### GET by CPF
+GET http://localhost:8080/cliente/12312312312
+
+### Create new customer
+POST http://localhost:8080/cliente
+Content-Type: application/json
+
+{
+  "id": 999,
+  "value": "content"
+}
