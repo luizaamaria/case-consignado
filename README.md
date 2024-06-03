@@ -10,9 +10,55 @@ Este projeto é uma aplicação de simulação de empréstimos consignados. Ele 
 
 ## Requisitos
 
-- Java 11+ (nesse projeto foi utilizado o Java 17)
+- Java 17 (utilizei o OpenJDK 17)
 - Maven 3.6.3+
 - H2 Database
+
+## Instalaçao no Linux
+
+Atualize o sistema:
+
+```sh
+sudo apt update
+sudo apt upgrade
+```
+
+Adicione o repositório do JDK 17
+    
+```sh
+sudo add-apt-repository ppa:linuxuprising/java
+```
+
+Instale o JDK 17
+
+```sh
+sudo apt update
+sudo apt install oracle-java17-installer --install-recommends
+```
+
+Verifique a versão do Java
+
+```sh
+java -version
+```
+
+Instale o Maven:
+
+```sh
+sudo apt install maven
+```
+
+## Instalaçao no Windows
+[
+### Instale o JDK 17:
+
+    Baixe e instale o JDK 17 do site oficial da Oracle ou utilize um instalador como o AdoptOpenJDK.
+    Após a instalação, configure a variável de ambiente JAVA_HOME apontando para o diretório de instalação do JDK.
+
+### Instale o Maven:
+
+    Baixe e instale o Maven 3.6.3+ do site oficial do Maven.
+    Configure a variável de ambiente M2_HOME apontando para o diretório de instalação do Maven e adicione %M2_HOME%\bin ao PATH.
 
 ## Estrutura do Projeto
 
@@ -92,7 +138,6 @@ Serviço de Simulação de Consignado
 
 Serviço de Contratos
 
-    POST /contrato-custodia: Cria um novo contrato.
     GET /contratos-custodia: Retorna todos os contratos.
 
 ## Exemplo de Uso
@@ -123,8 +168,8 @@ curl -X POST http://localhost:8081/calcular-consignado -H "Content-Type: applica
 
 ```sh
 
-curl -X POST http://localhost:8082/contrato -H "Content-Type: application/json" -d '{
-  "simulacaoId": 1
+curl -X GET http://localhost:8082/contratos-custodia -H "Content-Type: application/json" -d '{
+  status: '200 OK',
 }'
 ```
 

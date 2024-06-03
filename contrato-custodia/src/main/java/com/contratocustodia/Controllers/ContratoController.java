@@ -25,13 +25,13 @@ public class ContratoController {
     }
 
     @GetMapping("/contratos-custodia")
-    public ResponseEntity<List<Contrato>> listarContratos() {
+    public List<Contrato> listarContratos() {
         List<Contrato> contrato = contratoCustodiaService.contratos();
 
         if (contrato.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            return null;
         }
 
-        return ResponseEntity.ok(contrato);
+        return contrato;
     }
 }

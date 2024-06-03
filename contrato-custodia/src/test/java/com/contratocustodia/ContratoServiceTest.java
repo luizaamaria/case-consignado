@@ -59,10 +59,8 @@ public class ContratoServiceTest {
 
         when(contratoRepository.findAll()).thenReturn(contratos);
 
-        // Act
         List<Contrato> result = contratoService.contratos();
 
-        // Assert
         assertEquals(2, result.size());
         verify(contratoRepository, times(1)).findAll();
     }

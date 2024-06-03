@@ -3,8 +3,6 @@ package com.example.simulacaoconsignado.Services;
 import com.example.simulacaoconsignado.DTOs.SimulacaoRequestBodyDTO;
 import com.example.simulacaoconsignado.Entites.Cliente;
 import com.example.simulacaoconsignado.Entites.SimulacaoConsignado;
-import com.example.simulacaoconsignado.Exceptions.RequestApiException;
-import com.example.simulacaoconsignado.Exceptions.UnknownApiException;
 import com.example.simulacaoconsignado.Repository.SimulacaoConsignadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -33,8 +31,8 @@ public class SimulacaoConsignadoService {
     }
 
     public SimulacaoConsignado calcularSimulacao(SimulacaoRequestBodyDTO simulacaoRequestBodyDTO) {
-        String urlCliente = "http://localhost:8080/cliente/" + simulacaoRequestBodyDTO.getCpf();
-        String urlContrato = "http://localhost:8082/contrato-custodia";
+        String urlCliente = "http://localhost:8080/api/v1/cliente/" + simulacaoRequestBodyDTO.getCpf();
+        String urlContrato = "http://localhost:8082/api/v1/contrato-custodia";
         // variavel porque é dentro do método
 
         // Faz uma chamada GET para a URL especificada e recebe a resposta em um ResponseEntity,
@@ -45,12 +43,12 @@ public class SimulacaoConsignadoService {
         Cliente cliente = response.getBody();
 
         if (response.getStatusCode() == HttpStatus.NOT_FOUND) {
-            throw new RequestApiException("Cliente não encontrado.");
+            throw new RuntimeException("Cliente não encontrado.");
         }
 
-        if (response.getStatusCode() != HttpStatus.OK) {
-            throw new UnknownApiException("Erro desconhecido.");
-        }
+//        if (response.getStatusCode() != HttpStatus.CREATED) {
+//            throw new UnknownApiException("Erro desconhecido.");
+//        }
 
         // valor solicitado de 5000 em 5 meses, sendo um cliente correntista
         // do convenio de empresa privada e do segmento de varejo
