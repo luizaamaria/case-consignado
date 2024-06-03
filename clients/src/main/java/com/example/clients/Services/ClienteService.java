@@ -5,9 +5,11 @@ import com.example.clients.Repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service // SERVICE TRATA A REGRA DE NEGOCIO
+
 public class ClienteService {
 
     @Autowired
@@ -19,18 +21,7 @@ public class ClienteService {
 
     public Cliente buscarClientePorCPF(String cpf) {
         return clienteRepository.findByCpf(cpf);
-    }
-
-    public boolean isCorrentista(Cliente cliente) {
-        return cliente.isCorrentista();
-    }
-
-    public String obterSegmento(Cliente cliente) {
-        return cliente.getSegmento();
-    }
-
-    public String obterConvenio(Cliente cliente) {
-        return cliente.getConvenio();
+        // retorna um cliente com base no cpf
     }
 
     public List<Cliente> listarTodosClientes() {

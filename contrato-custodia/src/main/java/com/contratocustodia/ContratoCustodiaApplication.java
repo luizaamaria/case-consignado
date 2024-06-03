@@ -1,14 +1,13 @@
-package com.example.clients;
+package com.contratocustodia;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ClientsApplication {
+public class ContratoCustodiaApplication {
 
 	public static void main(String... args) {
-
-		SpringApplication.run(ClientsApplication.class, args);
+		SpringApplication.run(ContratoCustodiaApplication.class, args);
 	}
-}
 
+}

@@ -5,34 +5,54 @@ import com.example.clients.Services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.net.URI;
 import java.util.List;
 
+// CONTROLLER - RECEBE UMA ROTA E DECIDE PRA ONDE ELA TEM QUE IR
 @RestController
+@RequestMapping("/api/v1")
 public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
 
     @GetMapping("/cliente/{cpf}")
-    public Cliente identificarCliente(@PathVariable String cpf) {
+    public ResponseEntity<Cliente> identificarCliente(@PathVariable String cpf) {
         Cliente cliente = clienteService.buscarClientePorCPF(cpf);
-        
+
         if (cliente == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado.");
+            return ResponseEntity.notFound().build();
         }
-        return cliente;
+
+        return ResponseEntity.ok(cliente);
     }
 
     @GetMapping("/clientes")
-    public List<Cliente> listarTodosClientes() {
-        return clienteService.listarTodosClientes();
+    public ResponseEntity<List<Cliente>> listarTodosClientes() {
+        List<Cliente> clientes = clienteService.listarTodosClientes();
+
+        if (clientes.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(clientes);
     }
 
     @PostMapping("/cliente")
-    public Cliente criarCliente(@RequestBody Cliente cliente) {
-        return clienteService.criarCliente(cliente);
+    public ResponseEntity<Cliente> criarCliente(@RequestBody Cliente cliente)
+    {
+        Cliente novoCliente = clienteService.criarCliente(cliente);
+
+        if (novoCliente == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.created(
+                URI.create("/cliente/" + novoCliente.getCpf())
+        ).body(novoCliente);
     }
 }

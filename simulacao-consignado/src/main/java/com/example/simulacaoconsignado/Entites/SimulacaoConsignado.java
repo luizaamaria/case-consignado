@@ -18,11 +18,20 @@ public class SimulacaoConsignado {
     private LocalDate dataSimulacao;
     private String cpf;
     private String convenio;
-    private float valorSolicitado;
-    private float taxaJuros;
+    private double valorSolicitado;
+    private double taxaJuros;
+    private String taxaJurosFormatado;
     private int quantidadeParcelas;
-    private float valorTotal;
-    private float valorParcela;
+    private double valorTotal;
+    private double valorParcela;
+
+    public String getTaxaJurosFormatado() {
+        return taxaJurosFormatado;
+    }
+
+    public void setTaxaJurosFormatado(String taxaJurosFormatado) {
+        this.taxaJurosFormatado = taxaJurosFormatado;
+    }
 
     public Long getId() {
         return id;
@@ -56,19 +65,19 @@ public class SimulacaoConsignado {
         this.convenio = convenio;
     }
 
-    public float getValorSolicitado() {
+    public double getValorSolicitado() {
         return valorSolicitado;
     }
 
-    public void setValorSolicitado(float valorSolicitado) {
+    public void setValorSolicitado(double valorSolicitado) {
         this.valorSolicitado = valorSolicitado;
     }
 
-    public float getTaxaJuros() {
+    public double getTaxaJuros() {
         return taxaJuros;
     }
 
-    public void setTaxaJuros(float taxaJuros) {
+    public void setTaxaJuros(double taxaJuros) {
         this.taxaJuros = taxaJuros;
     }
 
@@ -80,19 +89,19 @@ public class SimulacaoConsignado {
         this.quantidadeParcelas = quantidadeParcelas;
     }
 
-    public float getValorTotal() {
+    public double getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(float valorTotal) {
+    public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
     }
 
-    public float getValorParcela() {
+    public double getValorParcela() {
         return valorParcela;
     }
 
-    public void setValorParcela(float valorParcela) {
+    public void setValorParcela(double valorParcela) {
         this.valorParcela = valorParcela;
     }
 }
